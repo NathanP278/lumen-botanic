@@ -1,24 +1,21 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
-  title: "LUMEN Botanic | Haute Cold-Pressed Botanicals & Living Elixirs",
+  title: "LUMEN // BOTANICA — Sleek Living Botanical Formulations",
   description:
-    "Cold-extracted at 36°F under 15,000 lbs of hydraulic force. Single-origin biodynamic organic botanicals formulated for cellular energy and radiant vitality.",
+    "Hydraulically cold-pressed at 36°F. 15,000 PSI force. 100% active living enzymes in 4 precision formulations with interactive cellular nutrition metrics.",
   keywords: [
     "cold-pressed juice",
-    "luxury botanicals",
-    "living enzymes",
-    "biodynamic juice",
-    "hydraulic press",
-    "cleanse ritual",
-    "alkaline elixir",
+    "botanical formulation",
+    "interactive nutrition",
+    "cellular hydration",
+    "raw living enzymes",
+    "modern botanicals",
   ],
   openGraph: {
-    title: "LUMEN Botanic | Haute Cold-Pressed Botanicals",
-    description:
-      "15,000 lbs hydraulic cold-press force. 0g synthetic additives. 100% active living phytonutrients.",
+    title: "LUMEN // BOTANICA — Precision Living Botanicals",
+    description: "Interactive 3D Cold-Pressed Formulations & Molecular Nutrition HUD.",
     type: "website",
   },
 };
@@ -29,20 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-[#08130E] text-[#FAF7F2] min-h-screen selection:bg-botanic-gold selection:text-botanic-dark">
-        <div className="film-grain-overlay" aria-hidden="true" />
-        <CartProvider>
-          {children}
-        </CartProvider>
+      <body className="antialiased bg-[#09090b] text-[#fafafa] min-h-screen selection:bg-emerald-400 selection:text-black font-sans">
+        {children}
       </body>
     </html>
   );

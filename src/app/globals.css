@@ -4,85 +4,75 @@
 
 @layer base {
   :root {
-    --background: #08130E;
-    --foreground: #FAF7F2;
+    --background: #09090b;
+    --foreground: #fafafa;
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: #08130E;
-    color: #FAF7F2;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #09090b;
+    color: #fafafa;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   body {
     overflow-x: hidden;
-    background-color: #08130E;
-    color: #FAF7F2;
+    background-color: #09090b;
+    color: #fafafa;
   }
 }
 
-/* Custom luxury scrollbar */
+/* Modern sleek minimalist scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #08130E;
+  background: #09090b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2A573F;
-  border-radius: 3px;
+  background: #27272a;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: #52525b;
 }
 
-/* Glassmorphism card */
-.glass-panel {
-  background: rgba(14, 36, 25, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.15);
+/* Modern glass surfaces */
+.modern-glass {
+  background: rgba(17, 17, 21, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.modern-glass-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.glass-panel-hover:hover {
-  border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.15);
-  transform: translateY(-2px);
-}
-
-.gold-gradient-text {
-  background: linear-gradient(135deg, #FFF6E0 0%, #D4AF37 50%, #AA820A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.modern-glass-hover:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
 }
 
-.gold-border-glow {
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+/* Neon glow aura utility */
+.glow-accent {
+  box-shadow: 0 0 40px -10px var(--accent-glow, rgba(34, 197, 94, 0.35));
 }
 
-/* Tactile Organic Film Grain Texture */
-.film-grain-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 99;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+/* Subtle grid line background for high-tech sleek feel */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
 }
 
-/* Ambient glow orb animation */
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.65; transform: scale(1.08); }
+/* Authentic Swiss Nutrition typography rules */
+.nutrition-rule-thick {
+  border-top: 8px solid currentColor;
 }
-
-.ambient-glow-pulse {
-  animation: pulseGlow 8s ease-in-out infinite;
+.nutrition-rule-medium {
+  border-top: 4px solid currentColor;
+}
+.nutrition-rule-thin {
+  border-top: 1px solid currentColor;
 }

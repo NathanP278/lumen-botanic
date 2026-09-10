@@ -1,101 +1,70 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import { Droplets, Sun, Sparkles, Sprout } from "lucide-react";
+import { Droplets, ShieldCheck, Zap, Sparkles, Gauge, Snowflake, Disc } from "lucide-react";
 
 export function PhilosophySection() {
   return (
-    <section id="philosophy" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Intro Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
-        <div className="relative h-[480px] rounded-3xl overflow-hidden glass-panel border-botanic-forest/80 shadow-2xl">
-          <Image
-            src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1200&q=80"
-            alt="Cold-pressed organic fresh herbs and botanicals"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08130E] via-[#08130E]/20 to-transparent" />
-          <div className="absolute bottom-8 left-8 right-8">
-            <span className="text-xs uppercase tracking-[0.25em] text-botanic-gold font-bold">
-              The Extraction Chamber
-            </span>
-            <p className="mt-2 text-xl font-serif text-botanic-cream">
-              3.5 lbs of heirloom botanical matter micro-crushed into every single 350ml elixir.
-            </p>
-          </div>
+    <section id="technology" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Intro Header */}
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-white/10 text-zinc-400 text-xs font-mono uppercase tracking-widest mb-4">
+          <Zap className="w-3.5 h-3.5 text-emerald-400" />
+          <span>Extraction Architecture</span>
         </div>
-
-        <div className="space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-botanic-forest/50 text-botanic-gold text-xs uppercase tracking-widest font-semibold">
-            <Sun className="w-3.5 h-3.5 text-botanic-gold" />
-            <span>The Science of Unaltered Vitality</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl font-serif text-botanic-cream leading-tight">
-            Blade Friction Destroys. <br />
-            <span className="italic gold-gradient-text">Hydraulic Pressure Preserves.</span>
-          </h2>
-
-          <p className="text-sm sm:text-base text-botanic-sand/80 leading-relaxed font-light">
-            Conventional juicers spin high-velocity steel blades at 15,000 RPM, generating friction heat that
-            instantly oxidizes fragile bioflavonoids and denatures live enzymes.
-          </p>
-
-          <p className="text-sm sm:text-base text-botanic-sand/80 leading-relaxed font-light">
-            LUMEN operates under cold hydraulic presses exerting 15,000 lbs of smooth, steady pressure in a
-            temperature-controlled 36°F cleanroom. The result: liquid nectar with unmatched nutrient density and
-            living cellular integrity.
-          </p>
-
-          <div className="grid grid-cols-2 gap-4 pt-4">
-            <div className="p-4 rounded-xl glass-panel border-botanic-forest">
-              <span className="block text-3xl font-serif text-botanic-gold font-bold">15,000 lbs</span>
-              <span className="text-xs text-botanic-sage uppercase tracking-wider mt-1 block">
-                Pure Hydraulic Force
-              </span>
-            </div>
-            <div className="p-4 rounded-xl glass-panel border-botanic-forest">
-              <span className="block text-3xl font-serif text-botanic-gold font-bold">36°F</span>
-              <span className="text-xs text-botanic-sage uppercase tracking-wider mt-1 block">
-                Constant Cold Chamber
-              </span>
-            </div>
-          </div>
-        </div>
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-sans">
+          Blade Friction Destroys. <br />
+          <span className="text-zinc-400">Hydraulic Force Preserves.</span>
+        </h2>
+        <p className="mt-4 text-sm sm:text-base text-zinc-400 leading-relaxed font-sans">
+          Conventional centrifugal juicers spin steel blades at 15,000 RPM, generating friction heat
+          that shears cellular walls and oxidizes delicate bioflavonoids. LUMEN utilizes 15,000 PSI
+          hydraulic pressure at a continuous 36°F cold chain.
+        </p>
       </div>
 
-      {/* 3 Pillars */}
-      <div id="sustainability" className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="p-8 rounded-2xl glass-panel glass-panel-hover border-botanic-forest/80 space-y-4">
-          <div className="w-12 h-12 rounded-xl bg-botanic-forest/60 flex items-center justify-center text-botanic-gold">
-            <Droplets className="w-6 h-6" />
+      {/* Grid of 3 Core Technology Pillars */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="p-8 rounded-3xl bg-zinc-900/50 border border-white/10 hover:border-white/20 transition-all space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center text-emerald-400 border border-white/10">
+            <Gauge className="w-6 h-6" />
           </div>
-          <h3 className="text-xl font-serif text-botanic-cream">Zero Water Dilution</h3>
-          <p className="text-xs sm:text-sm text-botanic-sage leading-relaxed font-light">
-            We never dilute with filtered tap water, concentrates, synthetic vitamins, or cane sugars.
-            Every drop is 100% pure plant cell sap extracted directly from living roots and greens.
+          <div className="flex items-baseline justify-between">
+            <h3 className="text-xl font-bold text-white font-sans">15,000 PSI Pressure</h3>
+            <span className="text-xs font-mono text-emerald-400 font-semibold">HYDRAULIC</span>
+          </div>
+          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Smooth hydraulic compression gently releases living plant cell sap without shearing or aeration.
+            Enzymes remain completely unoxidized, retaining 99.8% biological activity.
           </p>
         </div>
 
-        <div className="p-8 rounded-2xl glass-panel glass-panel-hover border-botanic-forest/80 space-y-4">
-          <div className="w-12 h-12 rounded-xl bg-botanic-forest/60 flex items-center justify-center text-botanic-gold">
-            <Sprout className="w-6 h-6" />
+        <div className="p-8 rounded-3xl bg-zinc-900/50 border border-white/10 hover:border-white/20 transition-all space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center text-amber-400 border border-white/10">
+            <Snowflake className="w-6 h-6" />
           </div>
-          <h3 className="text-xl font-serif text-botanic-cream">Biodynamic Terroir</h3>
-          <p className="text-xs sm:text-sm text-botanic-sage leading-relaxed font-light">
-            Sourced exclusively from certified organic regenerative farms that enrich topsoil ecology
-            and harvest according to lunar planting cycles for supreme secondary metabolite concentrations.
+          <div className="flex items-baseline justify-between">
+            <h3 className="text-xl font-bold text-white font-sans">36°F Cleanroom</h3>
+            <span className="text-xs font-mono text-amber-400 font-semibold">COLD-CHAIN</span>
+          </div>
+          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            From heirloom harvest to nitrogen glass sealing, formulations never exceed 36°F (2.2°C).
+            Zero pasteurization, zero HPP pressure heat waves, zero synthetic preservatives.
           </p>
         </div>
 
-        <div className="p-8 rounded-2xl glass-panel glass-panel-hover border-botanic-forest/80 space-y-4">
-          <div className="w-12 h-12 rounded-xl bg-botanic-forest/60 flex items-center justify-center text-botanic-gold">
-            <Sparkles className="w-6 h-6" />
+        <div className="p-8 rounded-3xl bg-zinc-900/50 border border-white/10 hover:border-white/20 transition-all space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center text-violet-400 border border-white/10">
+            <ShieldCheck className="w-6 h-6" />
           </div>
-          <h3 className="text-xl font-serif text-botanic-cream">Recyclable Apothecary Glass</h3>
-          <p className="text-xs sm:text-sm text-botanic-sage leading-relaxed font-light">
-            Bottled exclusively in UV-filtering apothecary glass that shields photosensitive phytonutrients
-            and guarantees zero microplastic leaching into your daily ritual.
+          <div className="flex items-baseline justify-between">
+            <h3 className="text-xl font-bold text-white font-sans">Pure Glass Seal</h3>
+            <span className="text-xs font-mono text-violet-400 font-semibold">100% INERT</span>
+          </div>
+          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Bottled exclusively in UV-filtering recyclable glass with nitrogen purge.
+            Completely free from endocrine disruptors, BPA, phthalates, and microplastic leeching.
           </p>
         </div>
       </div>

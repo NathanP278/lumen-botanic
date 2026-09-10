@@ -2,8 +2,14 @@
 
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { JuiceItem } from "@/types/juice";
 
-export function Footer() {
+interface FooterProps {
+  allJuices: JuiceItem[];
+  onSelectJuice: (juice: JuiceItem) => void;
+}
+
+export function Footer({ allJuices, onSelectJuice }: FooterProps) {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -16,64 +22,83 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#050C09] border-t border-botanic-forest/80 pt-16 pb-12 text-botanic-sand">
+    <footer className="bg-black border-t border-white/[0.08] pt-16 pb-12 text-zinc-400 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-botanic-forest/50">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-white/[0.08]">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <span className="text-2xl font-serif tracking-[0.25em] text-botanic-cream block">
-              LUMEN
-            </span>
-            <span className="text-[10px] tracking-[0.35em] text-botanic-gold font-sans uppercase block font-semibold">
-              Botanic Atelier
-            </span>
-            <p className="text-xs text-botanic-sage max-w-sm leading-relaxed font-light mt-2">
-              Haute botanical cold-press extraction. Micro-crushed in cleanrooms under 15,000 lbs
-              of hydraulic force to preserve unadulterated live plant enzymes.
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-extrabold tracking-[-0.04em] text-white">
+                LUMEN
+              </span>
+              <span className="text-zinc-400 font-mono text-xs">//</span>
+              <span className="text-xs tracking-[0.2em] text-zinc-400 font-mono uppercase">
+                BOTANICA
+              </span>
+            </div>
+            <p className="text-xs text-zinc-400 max-w-sm leading-relaxed font-sans">
+              Precision botanical cold-press formulations. Micro-extracted under 15,000 PSI hydraulic force
+              at 36°F to preserve raw living cellular enzymes and maximum phytochemical bioavailability.
             </p>
+            <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>LAB-CERTIFIED BATCH STATUS: ACTIVE</span>
+            </div>
           </div>
 
-          {/* Links 1 */}
+          {/* Formulations Quick Switch */}
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-botanic-gold font-semibold mb-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-white font-mono font-semibold mb-4">
               Formulations
             </p>
-            <ul className="space-y-2 text-xs text-botanic-sage">
-              <li><a href="#formulations" className="hover:text-botanic-cream transition-colors">Chlorophyll Verdant</a></li>
-              <li><a href="#formulations" className="hover:text-botanic-cream transition-colors">Solar Curcumin Gold</a></li>
-              <li><a href="#formulations" className="hover:text-botanic-cream transition-colors">Blood Root Elixir</a></li>
-              <li><a href="#formulations" className="hover:text-botanic-cream transition-colors">Obsidian Purifier</a></li>
-              <li><a href="#box-builder" className="hover:text-botanic-gold transition-colors font-medium">Curate 6-Pack Box</a></li>
+            <ul className="space-y-2 text-xs font-mono">
+              {allJuices.map((j) => (
+                <li key={j.id}>
+                  <button
+                    onClick={() => {
+                      onSelectJuice(j);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="hover:text-white transition-colors text-left flex items-center gap-1.5"
+                  >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: j.colors.accent }}
+                    />
+                    <span>{j.name}</span>
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Links 2 */}
+          {/* Technology */}
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-botanic-gold font-semibold mb-4">
-              Rituals & Quality
+            <p className="text-xs uppercase tracking-[0.2em] text-white font-mono font-semibold mb-4">
+              Science & Labs
             </p>
-            <ul className="space-y-2 text-xs text-botanic-sage">
-              <li><a href="#philosophy" className="hover:text-botanic-cream transition-colors">Hydraulic Cleanroom</a></li>
-              <li><a href="#sustainability" className="hover:text-botanic-cream transition-colors">Biodynamic Farms</a></li>
-              <li><a href="#" className="hover:text-botanic-cream transition-colors">Third-Party Heavy Metal Tests</a></li>
-              <li><a href="#" className="hover:text-botanic-cream transition-colors">Apothecary Glass Circularity</a></li>
-              <li><a href="#" className="hover:text-botanic-cream transition-colors">Cold-Chain Eco Logistics</a></li>
+            <ul className="space-y-2 text-xs font-mono text-zinc-400">
+              <li><a href="#technology" className="hover:text-white transition-colors">15,000 PSI Hydraulic</a></li>
+              <li><a href="#technology" className="hover:text-white transition-colors">36°F Cold Chain</a></li>
+              <li><a href="#nutrition" className="hover:text-white transition-colors">Phytochemical Matrix</a></li>
+              <li><a href="#nutrition" className="hover:text-white transition-colors">Interactive Nutrition HUD</a></li>
+              <li><span className="text-zinc-400">UV Glass Sealing</span></li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div className="space-y-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-botanic-gold font-semibold">
-              The Botanical Gazette
+            <p className="text-xs uppercase tracking-[0.2em] text-white font-mono font-semibold">
+              Research Dispatch
             </p>
-            <p className="text-xs text-botanic-sage leading-relaxed">
-              Receive private notifications for limited micro-batch solar harvests and seasonal botanicals.
+            <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+              Subscribe for laboratory harvest reports and bioactive phytochemical releases.
             </p>
 
             {subscribed ? (
-              <div className="flex items-center gap-2 text-xs text-botanic-gold py-2">
+              <div className="flex items-center gap-2 text-xs text-emerald-400 py-2 font-mono">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>You are on the private harvest list.</span>
+                <span>Subscribed to research feed.</span>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-2">
@@ -84,12 +109,12 @@ export function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter email address"
-                    className="w-full px-4 py-2.5 rounded-lg bg-botanic-forest/40 border border-botanic-forest text-xs text-botanic-cream placeholder:text-botanic-sage/60 focus:outline-none focus:border-botanic-gold transition-colors"
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white placeholder:text-zinc-400 focus:outline-none focus:border-white/30 transition-colors font-mono"
                   />
                   <button
                     type="submit"
-                    aria-label="Subscribe to newsletter"
-                    className="absolute right-1.5 top-1.5 bottom-1.5 px-3 rounded-md bg-botanic-gold hover:bg-botanic-goldLight text-botanic-dark transition-colors flex items-center justify-center"
+                    aria-label="Subscribe"
+                    className="absolute right-1 top-1 bottom-1 px-3 rounded-lg bg-white text-zinc-950 hover:bg-zinc-200 transition-colors flex items-center justify-center font-bold"
                   >
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
@@ -99,11 +124,11 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Legal and disclaimer */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-botanic-sage/70">
-          <p>© {new Date().getFullYear()} LUMEN Botanic Atelier Inc. All rights reserved.</p>
-          <p className="text-center md:text-right max-w-xl">
-            *These statements have not been evaluated by the FDA. This raw unpasteurized cold-pressed beverage is not intended to diagnose, treat, cure, or prevent any disease.
+        {/* Legal and FDA statement */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-400 font-mono">
+          <p>© {new Date().getFullYear()} LUMEN BOTANICA. All rights reserved.</p>
+          <p className="text-center md:text-right max-w-xl text-[10px] leading-relaxed text-zinc-400">
+            *These statements have not been evaluated by the FDA. This cold-pressed botanical beverage is not intended to diagnose, treat, cure, or prevent any disease.
           </p>
         </div>
       </div>

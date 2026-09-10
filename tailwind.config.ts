@@ -9,28 +9,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        botanic: {
-          dark: "#08130E",
-          emerald: "#0E2419",
-          forest: "#163828",
-          moss: "#2A573F",
-          leaf: "#3E835E",
-          sage: "#8FA89B",
-          cream: "#FAF7F2",
-          sand: "#EFE9DF",
-          gold: "#D4AF37",
-          goldLight: "#F3E5AB",
-          amber: "#D97706",
-          ruby: "#BE123C",
-          violet: "#7C3AED",
+        brand: {
+          bg: "#09090b",
+          surface: "#111115",
+          surfaceHover: "#18181e",
+          border: "rgba(255, 255, 255, 0.08)",
+          borderBright: "rgba(255, 255, 255, 0.2)",
+          muted: "#71717a",
+          subtle: "#a1a1aa",
+          light: "#fafafa",
+        },
+        vibrant: {
+          green: "#22c55e",
+          greenGlow: "rgba(34, 197, 94, 0.4)",
+          amber: "#f59e0b",
+          amberGlow: "rgba(245, 158, 11, 0.4)",
+          ruby: "#f43f5e",
+          rubyGlow: "rgba(244, 63, 94, 0.4)",
+          violet: "#a855f7",
+          violetGlow: "rgba(168, 85, 247, 0.4)",
         },
       },
       fontFamily: {
-        serif: ["Playfair Display", "Georgia", "serif"],
-        sans: ["Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
+        sans: ["Plus Jakarta Sans", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      animation: {
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "spin-slow": "spin 20s linear infinite",
       },
     },
   },

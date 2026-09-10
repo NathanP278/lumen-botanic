@@ -2,88 +2,43 @@
 
 import React, { useState } from "react";
 import { Navbar } from "@/components/Navbar";
-import { HeroSection } from "@/components/HeroSection";
-import { FlavorMatrix } from "@/components/FlavorMatrix";
-import { BoxBuilder } from "@/components/BoxBuilder";
+import { ProductShowcase } from "@/components/ProductShowcase";
 import { PhilosophySection } from "@/components/PhilosophySection";
-import { CartDrawer } from "@/components/CartDrawer";
 import { Footer } from "@/components/Footer";
-import { BottleCanvasWrapper } from "@/components/BottleCanvasWrapper";
-import { JuiceItem } from "@/types/juice";
 import { JUICES } from "@/data/juices";
+import { JuiceItem } from "@/types/juice";
 
 export default function HomePage() {
-  const [boxItems, setBoxItems] = useState<JuiceItem[]>([]);
+  const [activeJuice, setActiveJuice] = useState<JuiceItem>(JUICES[0]);
 
-  // Add juice to 6-pack box
-  const handleAddToBox = (juice: JuiceItem) => {
-    if (boxItems.length < 6) {
-      setBoxItems((prev) => [...prev, juice]);
-    }
-  };
-
-  // Remove slot from 6-pack
-  const handleRemoveFromBox = (index: number) => {
-    setBoxItems((prev) => prev.filter((_, idx) => idx !== index));
-  };
-
-  // Clear 6-pack
-  const handleClearBox = () => {
-    setBoxItems([]);
-  };
-
-  // Auto-fill remaining with best-sellers
-  const handleAutoFill = () => {
-    setBoxItems((prev) => {
-      const needed = 6 - prev.length;
-      if (needed <= 0) return prev;
-      const fillers = JUICES.slice(0, needed);
-      return [...prev, ...fillers];
-    });
+  const handleSelectJuice = (juice: JuiceItem) => {
+    setActiveJuice(juice);
   };
 
   return (
-    <main className="min-h-screen bg-[#08130E] text-[#FAF7F2] relative selection:bg-botanic-gold selection:text-botanic-dark">
-      {/* Top Navigation */}
-      <Navbar />
+    <main className="min-h-screen bg-[#09090b] text-[#fafafa] relative overflow-hidden bg-grid-pattern selection:bg-emerald-400 selection:text-black font-sans">
+      {/* Sleek Minimalist Navbar */}
+      <Navbar
+        activeJuice={activeJuice}
+        allJuices={JUICES}
+        onSelectJuice={handleSelectJuice}
+      />
 
-      {/* Persistent Full-Viewport 3D Bottle Stage */}
-      <div className="fixed inset-0 z-10 pointer-events-none flex items-center justify-center overflow-hidden">
-        <BottleCanvasWrapper />
-      </div>
+      {/* Main Interactive Product Showcase & 3D Stage & Interactive Nutrition HUD */}
+      <ProductShowcase
+        activeJuice={activeJuice}
+        allJuices={JUICES}
+        onSelectJuice={handleSelectJuice}
+      />
 
-      {/* Hero Section */}
-      <div className="relative z-20">
-        <HeroSection />
-      </div>
+      {/* Modern Extraction Tech & Cold Chain Section */}
+      <PhilosophySection />
 
-      {/* Flavor Discovery Matrix */}
-      <div className="relative z-20">
-        <FlavorMatrix onAddToBox={handleAddToBox} boxItems={boxItems} />
-      </div>
-
-      {/* Curated 6-Pack Box Builder */}
-      <div className="relative z-20">
-        <BoxBuilder
-          boxItems={boxItems}
-          onRemoveFromBox={handleRemoveFromBox}
-          onClearBox={handleClearBox}
-          onAutoFill={handleAutoFill}
-        />
-      </div>
-
-      {/* Philosophy & Sourcing Ritual */}
-      <div className="relative z-20">
-        <PhilosophySection />
-      </div>
-
-      {/* Footer */}
-      <div className="relative z-20">
-        <Footer />
-      </div>
-
-      {/* Sliding Luxury Cart Drawer */}
-      <CartDrawer />
+      {/* Minimalist Research Footer */}
+      <Footer
+        allJuices={JUICES}
+        onSelectJuice={handleSelectJuice}
+      />
     </main>
   );
 }
