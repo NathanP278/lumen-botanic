@@ -1,0 +1,7 @@
+{
+  "phase": "auditing",
+  "builder": "done",
+  "tester": "done",
+  "auditor": "active",
+  "errors": []
+}
