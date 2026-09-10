@@ -48,21 +48,23 @@ export function Footer({ allJuices, onSelectJuice }: FooterProps) {
 
           {/* Formulations Quick Switch */}
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-white font-mono font-semibold mb-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-white font-mono font-semibold mb-3">
               Formulations
             </p>
-            <ul className="space-y-2 text-xs font-mono">
+            <ul className="space-y-1 text-xs font-mono">
               {allJuices.map((j) => (
                 <li key={j.id}>
                   <button
+                    type="button"
                     onClick={() => {
                       onSelectJuice(j);
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="hover:text-white transition-colors text-left flex items-center gap-1.5"
+                    className="min-h-[44px] py-2 px-2 -mx-2 hover:text-white transition-colors text-left flex items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                    aria-label={`Switch formulation to ${j.name}`}
                   >
                     <span
-                      className="w-1.5 h-1.5 rounded-full"
+                      className="w-2 h-2 rounded-full shrink-0"
                       style={{ backgroundColor: j.colors.accent }}
                     />
                     <span>{j.name}</span>
@@ -74,15 +76,47 @@ export function Footer({ allJuices, onSelectJuice }: FooterProps) {
 
           {/* Technology */}
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-white font-mono font-semibold mb-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-white font-mono font-semibold mb-3">
               Science & Labs
             </p>
-            <ul className="space-y-2 text-xs font-mono text-zinc-400">
-              <li><a href="#technology" className="hover:text-white transition-colors">15,000 PSI Hydraulic</a></li>
-              <li><a href="#technology" className="hover:text-white transition-colors">36°F Cold Chain</a></li>
-              <li><a href="#nutrition" className="hover:text-white transition-colors">Phytochemical Matrix</a></li>
-              <li><a href="#nutrition" className="hover:text-white transition-colors">Interactive Nutrition HUD</a></li>
-              <li><span className="text-zinc-400">UV Glass Sealing</span></li>
+            <ul className="space-y-1 text-xs font-mono text-zinc-400">
+              <li>
+                <a
+                  href="#technology"
+                  className="min-h-[44px] py-2 px-2 -mx-2 inline-flex items-center hover:text-white transition-colors rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  15,000 PSI Hydraulic
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#technology"
+                  className="min-h-[44px] py-2 px-2 -mx-2 inline-flex items-center hover:text-white transition-colors rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  36°F Cold Chain
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#nutrition"
+                  className="min-h-[44px] py-2 px-2 -mx-2 inline-flex items-center hover:text-white transition-colors rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  Phytochemical Matrix
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#nutrition"
+                  className="min-h-[44px] py-2 px-2 -mx-2 inline-flex items-center hover:text-white transition-colors rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  Interactive Nutrition HUD
+                </a>
+              </li>
+              <li>
+                <span className="min-h-[44px] py-2 px-2 -mx-2 inline-flex items-center text-zinc-400">
+                  UV Glass Sealing
+                </span>
+              </li>
             </ul>
           </div>
 
@@ -102,21 +136,22 @@ export function Footer({ allJuices, onSelectJuice }: FooterProps) {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-                <div className="relative">
+                <div className="relative flex items-center">
                   <input
                     type="email"
                     required
+                    aria-label="Email address for research dispatch"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter email address"
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white placeholder:text-zinc-400 focus:outline-none focus:border-white/30 transition-colors font-mono"
+                    className="w-full min-h-[48px] pl-4 pr-14 py-3 rounded-2xl bg-zinc-900 border border-white/10 text-xs text-white placeholder:text-zinc-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 transition-colors font-mono"
                   />
                   <button
                     type="submit"
-                    aria-label="Subscribe"
-                    className="absolute right-1 top-1 bottom-1 px-3 rounded-lg bg-white text-zinc-950 hover:bg-zinc-200 transition-colors flex items-center justify-center font-bold"
+                    aria-label="Subscribe to research dispatch"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] absolute right-1 top-1/2 -translate-y-1/2 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 transition-colors flex items-center justify-center font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                   >
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </form>

@@ -10,6 +10,7 @@ export interface NutrientItem {
   bold?: boolean;
   source: string;
   mechanism: string;
+  pathway?: string;
 }
 
 export interface BioactiveCompound {
@@ -32,6 +33,7 @@ export interface DetailedNutrition {
 export interface JuiceItem {
   id: string;
   sku: string;
+  formulaCode?: "VERDANT" | "SOL" | "AURA" | "VOID";
   name: string;
   tagline: string;
   category: JuiceCategory;

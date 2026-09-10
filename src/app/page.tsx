@@ -23,7 +23,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#09090b] text-[#fafafa] relative overflow-hidden bg-grid-pattern selection:bg-emerald-400 selection:text-black font-sans">
+    <main className="min-h-screen w-full max-w-full bg-[#09090b] text-[#fafafa] relative overflow-x-hidden bg-grid-pattern selection:bg-emerald-400 selection:text-black font-sans">
       {/* Top Dynamic Scroll Progress Indicator */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2.5px] z-[60] origin-left"

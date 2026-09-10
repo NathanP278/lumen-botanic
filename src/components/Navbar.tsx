@@ -21,7 +21,7 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
         <div className="flex items-center gap-3 sm:gap-4">
           <a
             href="#"
-            className="flex items-center gap-2 group focus:outline-none"
+            className="min-h-[44px] inline-flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-xl px-1"
             aria-label="LUMEN BOTANICA Home"
           >
             <div className="flex items-center gap-2">
@@ -49,9 +49,9 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
           </div>
         </div>
 
-        {/* Center: 4-Product Quick Navigator (Desktop) */}
+          {/* Center: 4-Product Quick Navigator (Desktop) */}
         <nav
-          className="hidden md:flex items-center p-1 rounded-xl bg-zinc-900/80 border border-white/10 relative"
+          className="hidden md:flex items-center p-1 rounded-2xl bg-zinc-950/80 border border-white/10 relative backdrop-blur-xl"
           aria-label="Formulation Switcher"
         >
           {allJuices.map((juice, idx) => {
@@ -59,27 +59,30 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
             return (
               <motion.button
                 key={juice.id}
+                type="button"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onSelectJuice(juice)}
-                className={`relative px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors flex items-center gap-2 z-10 ${
+                aria-pressed={isActive}
+                aria-label={`Switch formulation to ${juice.name}`}
+                className={`relative min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-mono font-medium transition-colors flex items-center gap-2 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 ${
                   isActive ? "text-white font-bold" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeNavPill"
-                    className="absolute inset-0 bg-zinc-800 rounded-lg shadow-sm"
+                    className="absolute inset-0 bg-zinc-800 rounded-xl shadow-sm border border-white/10"
                     transition={{ type: "spring", stiffness: 450, damping: 35 }}
                   />
                 )}
                 <span
-                  className="w-1.5 h-1.5 rounded-full relative z-10 transition-colors"
+                  className="w-2 h-2 rounded-full relative z-10 transition-colors"
                   style={{
                     backgroundColor: isActive ? juice.colors.accent : "rgba(255,255,255,0.25)",
                   }}
                 />
                 <span className="relative z-10">
-                  0{idx + 1} {juice.name.split(" ")[0]}
+                  0{idx + 1} {juice.formulaCode || juice.name.split(" ")[0]}
                 </span>
               </motion.button>
             );
@@ -88,14 +91,14 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
 
         {/* Right: Section Navigation Links */}
         <div className="flex items-center gap-4 sm:gap-6">
-          <nav className="hidden lg:flex items-center space-x-6 text-xs font-mono uppercase tracking-wider text-zinc-400">
-            <a href="#showcase" className="hover:text-white transition-colors">
+          <nav className="hidden lg:flex items-center space-x-3 text-xs font-mono uppercase tracking-wider text-zinc-400">
+            <a href="#showcase" className="min-h-[44px] inline-flex items-center px-2 py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-lg">
               Studio
             </a>
-            <a href="#nutrition" className="hover:text-white transition-colors">
+            <a href="#nutrition" className="min-h-[44px] inline-flex items-center px-2 py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-lg">
               Nutrition HUD
             </a>
-            <a href="#technology" className="hover:text-white transition-colors">
+            <a href="#technology" className="min-h-[44px] inline-flex items-center px-2 py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-lg">
               Extraction Tech
             </a>
           </nav>
@@ -105,7 +108,7 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
             key={activeJuice.sku}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase border inline-flex items-center gap-1.5"
+            className="px-2.5 sm:px-3 py-1.5 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase border inline-flex items-center gap-1.5"
             style={{
               backgroundColor: `${activeJuice.colors.accent}15`,
               borderColor: `${activeJuice.colors.accent}40`,
@@ -116,10 +119,13 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
             <span>{activeJuice.sku}</span>
           </motion.div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu button with min-w-[44px] min-h-[44px] */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-zinc-300 hover:text-white focus:outline-none"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-dropdown"
+            className="md:hidden min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800/60 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -131,6 +137,7 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-nav-dropdown"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -148,10 +155,11 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
                     onSelectJuice(juice);
                     setMobileMenuOpen(false);
                   }}
-                  className={`p-3 rounded-xl border text-left text-xs font-mono transition-all min-h-[48px] ${
+                  aria-label={`Select ${juice.name} (${juice.category})`}
+                  className={`p-3 rounded-xl border text-left text-xs font-mono transition-all min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 ${
                     juice.id === activeJuice.id
                       ? "bg-zinc-800 border-white text-white font-bold shadow-sm"
-                      : "bg-zinc-900/60 border-white/10 text-zinc-400"
+                      : "bg-zinc-900/60 border-white/10 text-zinc-400 hover:text-white"
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -168,25 +176,25 @@ export function Navbar({ activeJuice, allJuices, onSelectJuice }: NavbarProps) {
               ))}
             </div>
 
-            <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5 text-xs font-mono text-zinc-300">
+            <div className="pt-3 border-t border-white/10 flex flex-col gap-1.5 text-xs font-mono text-zinc-300">
               <a
                 href="#showcase"
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-white"
+                className="min-h-[44px] flex items-center px-3 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Interactive 3D Studio
               </a>
               <a
                 href="#nutrition"
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-white"
+                className="min-h-[44px] flex items-center px-3 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Interactive Nutrition HUD
               </a>
               <a
                 href="#technology"
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-white"
+                className="min-h-[44px] flex items-center px-3 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 15,000 PSI Hydraulic Tech
               </a>

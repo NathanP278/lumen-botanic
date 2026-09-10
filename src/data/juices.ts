@@ -4,6 +4,7 @@ export const JUICES: JuiceItem[] = [
   {
     id: "chlorophyll-no-01",
     sku: "LB-01-VLD",
+    formulaCode: "VERDANT",
     name: "Chlorophyll Verdant",
     tagline: "Alkaline Cellular Cleanser",
     category: "Cleanse",
@@ -18,9 +19,9 @@ export const JUICES: JuiceItem[] = [
       { name: "Sicilian Meyer Lemon", origin: "Siracusa, Sicily", role: "Alkalizing ascorbic acid & citric enzyme" },
     ],
     colors: {
-      primary: "#10B981", // vibrant emerald
-      accent: "#4ADE80",  // neon green
-      glow: "rgba(74, 222, 128, 0.35)",
+      primary: "#10B981", // Hyper Emerald
+      accent: "#4ADE80",  // Lime / Neon Green
+      glow: "rgba(74, 222, 128, 0.4)",
       contrast: "#052e16",
     },
     stats: {
@@ -46,6 +47,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Naturally fat-free whole cold-pressed greens",
           mechanism: "Zero lipid load allows rapid gastric absorption of micronutrients directly to bloodstream.",
+          pathway: "Direct portal vein passive diffusion (zero lipid micelle requirement)",
         },
         {
           id: "sodium",
@@ -56,6 +58,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Living organic celery stalk & kale cellular brine",
           mechanism: "Balances intra/extracellular osmotic pressure and maintains hydration equilibrium.",
+          pathway: "Sodium-glucose cotransporter (SGLT1) & epithelial sodium channels (ENaC)",
         },
         {
           id: "carbs",
@@ -66,6 +69,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Unprocessed organic plant fibers and naturally occurring vegetable sugars",
           mechanism: "Provides clean, slow-release glycogen without triggering pancreatic insulin spikes.",
+          pathway: "Hexose transporter-facilitated mucosal absorption without insulin spike",
         },
         {
           id: "fiber",
@@ -76,6 +80,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Micro-filtered soluble pectins and cellulose strands from wild greens",
           mechanism: "Feeds beneficial gut microbiota and supports smooth intestinal motility.",
+          pathway: "Non-digestible prebiotic matrix reaching cecum & ascending colon",
         },
         {
           id: "sugar",
@@ -86,6 +91,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Naturally occurring botanical sucrose/fructose from cucumber and lemon",
           mechanism: "Provides pure clean cellular sweetness without synthetic additives or spikes.",
+          pathway: "Facilitated GLUT-2 / GLUT-5 brush-border enterocyte transport",
         },
         {
           id: "added-sugar",
@@ -96,6 +102,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Zero added sugar, syrups, or concentrates",
           mechanism: "Protects against systemic glycation and mitochondrial dysfunction.",
+          pathway: "N/A — Zero exogenous carbohydrate/fructose load",
         },
         {
           id: "protein",
@@ -106,6 +113,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Bioavailable amino acids derived from dark Tuscan kale leaves",
           mechanism: "Supplies essential plant amino acids for cellular repair and enzyme synthesis.",
+          pathway: "Pepsin/trypsin peptide cleavage & PEPT1 amino-acid transporter",
         },
         {
           id: "potassium",
@@ -115,6 +123,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 8,
           source: "Cold-crushed celery stalk and flat-leaf parsley",
           mechanism: "Activates sodium-potassium pump, regulating heart rhythm and neuromuscular tone.",
+          pathway: "Paracellular tight-junction passive diffusion across enterocytes",
         },
         {
           id: "vitamin-c",
@@ -124,6 +133,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 80,
           source: "Cold-pressed Sicilian Meyer lemon juice",
           mechanism: "Potent electron donor, stimulating collagen biosynthesis and free-radical quenching.",
+          pathway: "Sodium-dependent vitamin C transporter 1 (SVCT1)",
         },
         {
           id: "vitamin-a",
@@ -133,6 +143,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 50,
           source: "Heirloom kale carotenoid pigments",
           mechanism: "Protects ocular tissue and boosts epithelial membrane regeneration.",
+          pathway: "Scavenger receptor class B type 1 (SR-BI) enterocytic pathway",
         },
         {
           id: "iron",
@@ -142,6 +153,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 12,
           source: "Plant-derived non-heme iron complexed with natural ascorbic acid",
           mechanism: "Incorporates into hemoglobin for accelerated systemic oxygen delivery.",
+          pathway: "Divalent metal transporter 1 (DMT1) coupled with apical ferric reductase",
         },
       ],
       bioactives: [
@@ -169,6 +181,7 @@ export const JUICES: JuiceItem[] = [
   {
     id: "solar-curcumin-no-02",
     sku: "LB-02-GLD",
+    formulaCode: "SOL",
     name: "Solar Curcumin",
     tagline: "Bioactive Curcumin Fortifier",
     category: "Immunity",
@@ -183,8 +196,8 @@ export const JUICES: JuiceItem[] = [
       { name: "Amalfi Pink Grapefruit", origin: "Campania, Italy", role: "Naringin bioflavonoid & crisp tartness" },
     ],
     colors: {
-      primary: "#F59E0B", // vibrant amber/gold
-      accent: "#FBBF24",  // radiant solar gold
+      primary: "#F59E0B", // Radiant Amber
+      accent: "#FBBF24",  // Solar Gold
       glow: "rgba(245, 158, 11, 0.4)",
       contrast: "#451a03",
     },
@@ -211,6 +224,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Naturally occurring turmeric essential lipid fraction",
           mechanism: "Hydrophobic lipid micelles carry fat-soluble curcuminoids across intestinal villi.",
+          pathway: "Passive micellar incorporation via short/medium chain fatty acids",
         },
         {
           id: "sodium",
@@ -221,6 +235,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Organic mineral root salts",
           mechanism: "Maintains optimal cellular ionic conductance.",
+          pathway: "Active basolateral Na+/K+-ATPase electrochemical gradient",
         },
         {
           id: "carbs",
@@ -231,6 +246,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Valencia orange carbohydrates and ginger polysaccharides",
           mechanism: "Delivers immediate bio-available cellular glucose to energize lymphatic circulation.",
+          pathway: "Apical GLUT5 carrier-mediated facilitated mucosal diffusion",
         },
         {
           id: "fiber",
@@ -241,6 +257,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Soluble gingerol and orange pulp pectins",
           mechanism: "Slows gastric emptying to ensure sustained nutrient uptake.",
+          pathway: "Colonic microbial fermentation to anti-inflammatory short-chain fatty acids",
         },
         {
           id: "sugar",
@@ -251,6 +268,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Naturally occurring Valencia citrus sugars",
           mechanism: "Whole-fruit balanced sucrose and fructose matrix.",
+          pathway: "Coordinated small intestine passive mucosal hexose absorption",
         },
         {
           id: "added-sugar",
@@ -261,6 +279,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "100% cold-pressed fruit and rhizome juice",
           mechanism: "Free of synthetic sweeteners or inflammatory refined additives.",
+          pathway: "N/A — Pure unadulterated botanical rhizome matrix",
         },
         {
           id: "protein",
@@ -271,6 +290,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Rhizome peptides and root amino acids",
           mechanism: "Supports cellular micro-repair in synovial joint linings.",
+          pathway: "Endopeptidase hydrolysis into bioavailable bioactive dipeptides",
         },
         {
           id: "potassium",
@@ -280,6 +300,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 7,
           source: "Fresh ginger and orange juice mineral solids",
           mechanism: "Balances autonomic cardiovascular rhythm and vascular elasticity.",
+          pathway: "Enterocyte basolateral potassium channel passive gradient release",
         },
         {
           id: "vitamin-c",
@@ -289,6 +310,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 140,
           source: "Cold-extracted Valencia orange & Amalfi grapefruit",
           mechanism: "Synergizes with bioflavonoids to reinforce leukocyte membranes and immune vitality.",
+          pathway: "SVCT1 transporter with bioflavonoid protection against oxidation",
         },
         {
           id: "vitamin-a",
@@ -298,6 +320,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 20,
           source: "Curcuma longum carotenoids",
           mechanism: "Supports mucosal immune defense across gut and respiratory boundaries.",
+          pathway: "Lymphatic chylomicron packaging via apical SR-BI uptake",
         },
         {
           id: "iron",
@@ -307,6 +330,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 10,
           source: "Hawaiian volcanic soil mineral root minerals",
           mechanism: "Promotes mitochondrial ATP synthesis via cytochrome enzyme activity.",
+          pathway: "DMT1 carrier uptake enhanced by co-extracted rhizome organic acids",
         },
       ],
       bioactives: [
@@ -334,6 +358,7 @@ export const JUICES: JuiceItem[] = [
   {
     id: "ruby-beetroot-no-03",
     sku: "LB-03-RBY",
+    formulaCode: "AURA",
     name: "Blood Root",
     tagline: "Nitric Oxide Stamina Elixir",
     category: "Energy",
@@ -348,9 +373,9 @@ export const JUICES: JuiceItem[] = [
       { name: "Fiery Peruvian Ginger", origin: "Junín, Peru", role: "Endothelial circulation stimulator" },
     ],
     colors: {
-      primary: "#F43F5E", // vibrant ruby crimson
-      accent: "#FB7185",  // neon rose
-      glow: "rgba(244, 63, 94, 0.4)",
+      primary: "#C026D3", // Ethereal Violet / Deep Magenta
+      accent: "#F43F5E",  // Neon Magenta / Vibrant Rose
+      glow: "rgba(244, 63, 94, 0.45)",
       contrast: "#4c0519",
     },
     stats: {
@@ -376,6 +401,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Zero fat heirloom root and tree-fruit extract",
           mechanism: "Permits maximum endothelial nitrate conversion without digestive slowing.",
+          pathway: "Immediate gastric transit into duodenal absorptive mucosa",
         },
         {
           id: "sodium",
@@ -386,6 +412,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Natural root-derived sodium from heirloom beetroot",
           mechanism: "Ensures cellular fluid volume maintenance under athletic exertion.",
+          pathway: "Solute-coupled fluid transport across enterocytic brush borders",
         },
         {
           id: "carbs",
@@ -396,6 +423,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Beetroot sucrose, cherry fructose, and apple carbohydrates",
           mechanism: "Provides sustained complex glycogen replenishment for muscle fibers.",
+          pathway: "Duodenal alpha-glucosidase cleavage delivering sustained cellular glycogen",
         },
         {
           id: "fiber",
@@ -406,6 +434,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Soluble beetroot cellulose and apple pectin",
           mechanism: "Buffers sugar absorption and lowers glycemic index to 38.",
+          pathway: "Bifidogenic pectin matrix sustaining short-chain butyrate synthesis",
         },
         {
           id: "sugar",
@@ -416,6 +445,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Whole food natural sugars from Chioggia beet and Montmorency cherry",
           mechanism: "Natural fuel paired with protective polyphenols.",
+          pathway: "Dual GLUT-5 / GLUT-2 coordinated enterocyte uptake",
         },
         {
           id: "added-sugar",
@@ -426,6 +456,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "100% pure cold-pressed botanical juice",
           mechanism: "Zero synthetic syrups or concentrated processed sugars.",
+          pathway: "N/A — 100% cold-pressed organic whole fruit & root extract",
         },
         {
           id: "protein",
@@ -436,6 +467,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Whole vegetable root amino acids",
           mechanism: "Supplies building blocks for vascular nitric oxide synthase.",
+          pathway: "Apical H+/peptide symporter (PEPT1) mediated absorption",
         },
         {
           id: "potassium",
@@ -445,6 +477,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 10,
           source: "Rich beetroot mineral core",
           mechanism: "Assists vasodilation and muscle contraction endurance.",
+          pathway: "Voltage-gated vascular endothelial conductance channels",
         },
         {
           id: "vitamin-c",
@@ -454,6 +487,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 45,
           source: "Tart Montmorency cherry and wild lime",
           mechanism: "Protects nitric oxide molecules from oxidative degradation in blood vessels.",
+          pathway: "Dual SVCT1/SVCT2 transporter cellular influx",
         },
         {
           id: "iron",
@@ -463,6 +497,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 13,
           source: "Organic dark loam soil beetroot minerals",
           mechanism: "Critical cofactor for myoglobin and oxygen transport during stamina tests.",
+          pathway: "Ferroportin-mediated basolateral export into circulating transferrin",
         },
         {
           id: "folate",
@@ -472,6 +507,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 24,
           source: "Beetroot foliage and root crown",
           mechanism: "Accelerates red blood cell formation and DNA methylation.",
+          pathway: "Proton-coupled folate transporter (PCFT) & folate receptor alpha",
         },
       ],
       bioactives: [
@@ -499,6 +535,7 @@ export const JUICES: JuiceItem[] = [
   {
     id: "activated-noir-no-04",
     sku: "LB-04-BLK",
+    formulaCode: "VOID",
     name: "Obsidian Purifier",
     tagline: "Activated Micro-Carbon Reset",
     category: "Detox",
@@ -513,10 +550,10 @@ export const JUICES: JuiceItem[] = [
       { name: "High-Altitude Lavender Hydrosol", origin: "Provence, France", role: "Digestive spasmolytic calm" },
     ],
     colors: {
-      primary: "#8B5CF6", // electric violet accent with deep charcoal body
-      accent: "#A855F7",  // vibrant ultraviolet
-      glow: "rgba(168, 85, 247, 0.4)",
-      contrast: "#2e1065",
+      primary: "#1E1B4B", // Deep Indigo / Obsidian Charcoal Body
+      accent: "#06B6D4",  // Electric Cyan
+      glow: "rgba(6, 182, 212, 0.45)",
+      contrast: "#083344",
     },
     stats: {
       coldPressPsi: "15,000 PSI",
@@ -541,6 +578,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Ultra-pure aqueous mineral suspension",
           mechanism: "Eliminates lipid competition for carbon pore binding sites.",
+          pathway: "N/A — Non-lipogenic aqueous mineral suspension",
         },
         {
           id: "sodium",
@@ -551,6 +589,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Colloidal volcanic trace mineral salts",
           mechanism: "Replenishes essential electrolytes lost during metabolic cleansing.",
+          pathway: "Colloidal ionic uptake via solvent drag across tight junctions",
         },
         {
           id: "carbs",
@@ -561,6 +600,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Organic agave inulin and fresh lemon carbs",
           mechanism: "Prebiotic oligosaccharides nourish gut-lining microbiome.",
+          pathway: "Prebiotic inulin direct transit to colonic microbiome without spiking blood sugar",
         },
         {
           id: "fiber",
@@ -571,6 +611,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Micro-porous carbon matrix and soluble lemon pectins",
           mechanism: "Acts as a gentle physical sweep through intestinal mucosa.",
+          pathway: "Macroporous carbon network maintaining non-absorbed luminal entrapment",
         },
         {
           id: "sugar",
@@ -581,6 +622,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Unrefined organic blue agave nectar & lemon juice",
           mechanism: "Subtle low-glycemic natural taste profile.",
+          pathway: "Minimal low-glycemic passive mucosal permeation",
         },
         {
           id: "added-sugar",
@@ -591,6 +633,7 @@ export const JUICES: JuiceItem[] = [
           indent: true,
           source: "Zero artificial sugars or chemical corn syrups",
           mechanism: "Prevents toxic byproduct generation in colon.",
+          pathway: "N/A — Free of refined sugars or high-fructose corn syrup",
         },
         {
           id: "protein",
@@ -601,6 +644,7 @@ export const JUICES: JuiceItem[] = [
           bold: true,
           source: "Minimal protein formulation",
           mechanism: "Provides digestive rest to GI tract during deep purification.",
+          pathway: "N/A — Digestive resting phase for mucosal lining",
         },
         {
           id: "potassium",
@@ -610,6 +654,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 3,
           source: "Volcanic spring water minerals and lemon",
           mechanism: "Restores hydration balance at the cellular membrane.",
+          pathway: "Transcellular osmotic transport coupled with volcanic trace co-minerals",
         },
         {
           id: "vitamin-c",
@@ -619,6 +664,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 95,
           source: "Sorrento lemon juice and cold-extracted lemon zest",
           mechanism: "Triggers hepatic bile flow and speeds toxin elimination.",
+          pathway: "Ascorbate-anion exchange pathway stimulated by natural citric acid",
         },
         {
           id: "magnesium",
@@ -628,6 +674,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 11,
           source: "Colloidal deep volcanic minerals",
           mechanism: "Relaxes GI smooth muscles, relieving abdominal cramping and tension.",
+          pathway: "Transient receptor potential melastatin 6 & 7 (TRPM6 / TRPM7) channels",
         },
         {
           id: "calcium",
@@ -637,6 +684,7 @@ export const JUICES: JuiceItem[] = [
           dvPercent: 5,
           source: "Natural mineral spring aquifers",
           mechanism: "Provides structural buffer against acidic metabolites.",
+          pathway: "Transient receptor potential vanilloid 6 (TRPV6) & Calbindin-D9k transport",
         },
       ],
       bioactives: [

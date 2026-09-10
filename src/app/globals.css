@@ -76,3 +76,51 @@
 .nutrition-rule-thin {
   border-top: 1px solid currentColor;
 }
+
+/* Accessibility & Touch Target Minimums */
+.touch-target-44 {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Custom 360 degree Scrub Range & Ruler */
+input[type="range"].scrub-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"].scrub-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+input[type="range"].scrub-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+  margin-top: -9px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+input[type="range"].scrub-slider:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.95);
+}
+input[type="range"].scrub-slider::-moz-range-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+input[type="range"].scrub-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+  border: none;
+}
+
