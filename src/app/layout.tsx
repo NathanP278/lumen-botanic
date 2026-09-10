@@ -39,6 +39,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-[#08130E] text-[#FAF7F2] min-h-screen selection:bg-botanic-gold selection:text-botanic-dark">
+        <div className="film-grain-overlay" aria-hidden="true" />
         <CartProvider>
           {children}
         </CartProvider>

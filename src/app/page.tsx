@@ -8,6 +8,7 @@ import { BoxBuilder } from "@/components/BoxBuilder";
 import { PhilosophySection } from "@/components/PhilosophySection";
 import { CartDrawer } from "@/components/CartDrawer";
 import { Footer } from "@/components/Footer";
+import { BottleCanvasWrapper } from "@/components/BottleCanvasWrapper";
 import { JuiceItem } from "@/types/juice";
 import { JUICES } from "@/data/juices";
 
@@ -46,25 +47,40 @@ export default function HomePage() {
       {/* Top Navigation */}
       <Navbar />
 
-      {/* Hero Section with 3D Canvas */}
-      <HeroSection />
+      {/* Persistent Full-Viewport 3D Bottle Stage */}
+      <div className="fixed inset-0 z-10 pointer-events-none flex items-center justify-center overflow-hidden">
+        <BottleCanvasWrapper />
+      </div>
+
+      {/* Hero Section */}
+      <div className="relative z-20">
+        <HeroSection />
+      </div>
 
       {/* Flavor Discovery Matrix */}
-      <FlavorMatrix onAddToBox={handleAddToBox} boxItems={boxItems} />
+      <div className="relative z-20">
+        <FlavorMatrix onAddToBox={handleAddToBox} boxItems={boxItems} />
+      </div>
 
       {/* Curated 6-Pack Box Builder */}
-      <BoxBuilder
-        boxItems={boxItems}
-        onRemoveFromBox={handleRemoveFromBox}
-        onClearBox={handleClearBox}
-        onAutoFill={handleAutoFill}
-      />
+      <div className="relative z-20">
+        <BoxBuilder
+          boxItems={boxItems}
+          onRemoveFromBox={handleRemoveFromBox}
+          onClearBox={handleClearBox}
+          onAutoFill={handleAutoFill}
+        />
+      </div>
 
       {/* Philosophy & Sourcing Ritual */}
-      <PhilosophySection />
+      <div className="relative z-20">
+        <PhilosophySection />
+      </div>
 
       {/* Footer */}
-      <Footer />
+      <div className="relative z-20">
+        <Footer />
+      </div>
 
       {/* Sliding Luxury Cart Drawer */}
       <CartDrawer />

@@ -1,0 +1,10 @@
+{
+  "iteration": 2,
+  "max_iterations": 8,
+  "visual_score": 100,
+  "performance_score": 100,
+  "stability_score": 100,
+  "average_score": 100,
+  "passed": true,
+  "blockers": []
+}

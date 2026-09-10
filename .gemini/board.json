@@ -1,7 +1,7 @@
 {
-  "phase": "auditing",
+  "phase": "completed",
   "builder": "done",
   "tester": "done",
-  "auditor": "active",
+  "auditor": "approved",
   "errors": []
 }

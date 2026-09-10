@@ -1,21 +1,13 @@
 "use client";
 
 import React from "react";
-import { BottleCanvasWrapper } from "@/components/BottleCanvasWrapper";
 import { ArrowRight, ShieldCheck, Sparkles, Droplets, Leaf } from "lucide-react";
 
 export function HeroSection() {
   return (
     <section className="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden">
       {/* Background ambient radiance */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[500px] bg-gradient-to-br from-botanic-moss/20 via-botanic-gold/10 to-transparent rounded-full blur-3xl pointer-events-none" />
-
-      {/* Full viewport 3D Canvas layer */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-        <div className="w-full h-full max-w-6xl mx-auto">
-          <BottleCanvasWrapper />
-        </div>
-      </div>
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[500px] bg-gradient-to-br from-botanic-moss/20 via-botanic-gold/10 to-transparent rounded-full blur-3xl pointer-events-none ambient-glow-pulse" />
 
       {/* Content overlay */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-between min-h-[75vh]">
