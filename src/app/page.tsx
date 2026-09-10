@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ProductShowcase } from "@/components/ProductShowcase";
 import { PhilosophySection } from "@/components/PhilosophySection";
@@ -10,6 +11,12 @@ import { JuiceItem } from "@/types/juice";
 
 export default function HomePage() {
   const [activeJuice, setActiveJuice] = useState<JuiceItem>(JUICES[0]);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   const handleSelectJuice = (juice: JuiceItem) => {
     setActiveJuice(juice);
@@ -17,6 +24,15 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#09090b] text-[#fafafa] relative overflow-hidden bg-grid-pattern selection:bg-emerald-400 selection:text-black font-sans">
+      {/* Top Dynamic Scroll Progress Indicator */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2.5px] z-[60] origin-left"
+        style={{
+          scaleX,
+          backgroundColor: activeJuice.colors.accent,
+        }}
+      />
+
       {/* Sleek Minimalist Navbar */}
       <Navbar
         activeJuice={activeJuice}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
@@ -21,7 +21,7 @@ function createModernLabelTexture(juice: JuiceItem): THREE.CanvasTexture {
     ctx.fillRect(0, 0, 1024, 512);
 
     // Minimalist hairline perimeter
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
     ctx.lineWidth = 2;
     ctx.strokeRect(18, 18, 1024 - 36, 512 - 36);
 
@@ -50,7 +50,7 @@ function createModernLabelTexture(juice: JuiceItem): THREE.CanvasTexture {
     ctx.textAlign = "left";
     ctx.fillText(`// ${juice.sku}  •  ${juice.category.toUpperCase()} FORMULA`, 58, 68);
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
     ctx.font = "500 15px 'Plus Jakarta Sans', sans-serif";
     ctx.fillText("HYDRAULIC COLD-PRESS  •  36°F RAW LIVING CELLULAR EXTRACT", 58, 100);
 
@@ -66,7 +66,7 @@ function createModernLabelTexture(juice: JuiceItem): THREE.CanvasTexture {
     ctx.fillText(juice.name.toUpperCase(), 58, 260);
 
     // Tagline
-    ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
     ctx.font = "500 20px 'Plus Jakarta Sans', sans-serif";
     ctx.fillText(juice.tagline, 58, 300);
 
@@ -151,18 +151,18 @@ interface BottleProps {
   activeJuice: JuiceItem;
   targetRotY: number;
   targetRotX: number;
-  isAutoRotate: boolean;
   scale: number;
   offsetY?: number;
+  isDragging: boolean;
 }
 
 function InteractiveJuiceBottle({
   activeJuice,
   targetRotY,
   targetRotX,
-  isAutoRotate,
   scale,
   offsetY = 0,
+  isDragging,
 }: BottleProps) {
   const bottleGroupRef = useRef<THREE.Group>(null);
   const liquidMeshRef = useRef<THREE.Mesh>(null);
@@ -182,26 +182,27 @@ function InteractiveJuiceBottle({
   useFrame((state, delta) => {
     if (!bottleGroupRef.current) return;
 
-    // Smooth rotation dampening
+    // Smooth rotation dampening (snappier during touch drag, silky during release)
+    const dampSpeed = isDragging ? 12 : 6;
     bottleGroupRef.current.rotation.y = THREE.MathUtils.damp(
       bottleGroupRef.current.rotation.y,
       targetRotY,
-      6,
+      dampSpeed,
       delta
     );
     bottleGroupRef.current.rotation.x = THREE.MathUtils.damp(
       bottleGroupRef.current.rotation.x,
       targetRotX,
-      6,
+      dampSpeed,
       delta
     );
 
-    // Subtle micro-float
-    const idleY = Math.sin(state.clock.elapsedTime * 1.5) * 0.04;
+    // Gentle micro-float when idle
+    const idleY = isDragging ? 0 : Math.sin(state.clock.elapsedTime * 1.4) * 0.035;
     bottleGroupRef.current.position.y = THREE.MathUtils.damp(
       bottleGroupRef.current.position.y,
       offsetY + idleY,
-      4,
+      5,
       delta
     );
 
@@ -209,20 +210,20 @@ function InteractiveJuiceBottle({
     if (liquidMeshRef.current) {
       const liquidMat = liquidMeshRef.current.material as THREE.MeshStandardMaterial;
       if (liquidMat) {
-        liquidMat.color.r = THREE.MathUtils.damp(liquidMat.color.r, targetRgb.r, 4, delta);
-        liquidMat.color.g = THREE.MathUtils.damp(liquidMat.color.g, targetRgb.g, 4, delta);
-        liquidMat.color.b = THREE.MathUtils.damp(liquidMat.color.b, targetRgb.b, 4, delta);
+        liquidMat.color.r = THREE.MathUtils.damp(liquidMat.color.r, targetRgb.r, 5, delta);
+        liquidMat.color.g = THREE.MathUtils.damp(liquidMat.color.g, targetRgb.g, 5, delta);
+        liquidMat.color.b = THREE.MathUtils.damp(liquidMat.color.b, targetRgb.b, 5, delta);
       }
     }
 
-    // Meniscus liquid ripple
+    // Meniscus liquid ripple with agitation from drag speed
     if (meniscusRef.current) {
       const elapsed = state.clock.elapsedTime;
       const meniscusMat = meniscusRef.current.material as THREE.MeshStandardMaterial;
       if (meniscusMat) {
-        meniscusMat.color.r = THREE.MathUtils.damp(meniscusMat.color.r, targetRgb.r * 1.1, 4, delta);
-        meniscusMat.color.g = THREE.MathUtils.damp(meniscusMat.color.g, targetRgb.g * 1.1, 4, delta);
-        meniscusMat.color.b = THREE.MathUtils.damp(meniscusMat.color.b, targetRgb.b * 1.1, 4, delta);
+        meniscusMat.color.r = THREE.MathUtils.damp(meniscusMat.color.r, targetRgb.r * 1.1, 5, delta);
+        meniscusMat.color.g = THREE.MathUtils.damp(meniscusMat.color.g, targetRgb.g * 1.1, 5, delta);
+        meniscusMat.color.b = THREE.MathUtils.damp(meniscusMat.color.b, targetRgb.b * 1.1, 5, delta);
         meniscusRef.current.position.y = 1.37 + Math.sin(elapsed * 2.8) * 0.02;
         meniscusRef.current.rotation.x = -Math.PI / 2 + Math.sin(elapsed * 2.0) * 0.03;
       }
@@ -354,6 +355,10 @@ interface ThreeBottleCanvasProps {
   viewPreset: "front" | "label" | "tilt" | "cap";
   isAutoRotate: boolean;
   onUserInteract?: () => void;
+  onSwipeNext?: () => void;
+  onSwipePrev?: () => void;
+  externalRotY?: number;
+  onRotYChange?: (deg: number) => void;
 }
 
 export function ThreeBottleCanvas({
@@ -361,15 +366,24 @@ export function ThreeBottleCanvas({
   viewPreset,
   isAutoRotate,
   onUserInteract,
+  onSwipeNext,
+  onSwipePrev,
+  externalRotY,
+  onRotYChange,
 }: ThreeBottleCanvasProps) {
   const [hasWebGL, setHasWebGL] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   // Drag interaction state
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
+  const touchLockedAxisRef = useRef<"horizontal" | "vertical" | null>(null);
+  const velocityRef = useRef(0);
+  const animFrameRef = useRef<number | null>(null);
+
   const [rotY, setRotY] = useState(0);
   const [rotX, setRotX] = useState(0.04);
+  const [scrollRotDelta, setScrollRotDelta] = useState(0);
 
   useEffect(() => {
     try {
@@ -384,8 +398,19 @@ export function ThreeBottleCanvas({
       setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener("resize", checkMobile, { passive: true });
+
+    // Scroll-driven rotation linkage
+    const handleScroll = () => {
+      const scrollPos = window.scrollY;
+      setScrollRotDelta(scrollPos * 0.0018);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   // Update target rotation when preset changes
@@ -394,44 +419,130 @@ export function ThreeBottleCanvas({
       setRotY(0);
       setRotX(0.04);
     } else if (viewPreset === "label") {
-      setRotY(0.2);
+      setRotY(0.25);
       setRotX(0.0);
     } else if (viewPreset === "tilt") {
-      setRotY(0.8);
-      setRotX(0.22);
+      setRotY(0.85);
+      setRotX(0.24);
     } else if (viewPreset === "cap") {
       setRotY(0.4);
-      setRotX(0.75);
+      setRotX(0.72);
     }
   }, [viewPreset]);
 
-  // Continuous auto-rotation when active and not user-dragging
+  // Sync external scrub dial if provided
+  useEffect(() => {
+    if (externalRotY !== undefined) {
+      setRotY((externalRotY * Math.PI) / 180);
+    }
+  }, [externalRotY]);
+
+  // Inertia momentum decay loop
+  useEffect(() => {
+    const updateInertia = () => {
+      if (!isDragging && Math.abs(velocityRef.current) > 0.0002) {
+        setRotY((prev) => {
+          const next = prev + velocityRef.current;
+          if (onRotYChange) {
+            const deg = ((next * 180) / Math.PI) % 360;
+            onRotYChange(deg < 0 ? deg + 360 : deg);
+          }
+          return next;
+        });
+        velocityRef.current *= 0.93; // smooth friction decay
+      }
+      animFrameRef.current = requestAnimationFrame(updateInertia);
+    };
+
+    animFrameRef.current = requestAnimationFrame(updateInertia);
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, [isDragging, onRotYChange]);
+
+  // Auto-rotation when active and user is not touching
   useEffect(() => {
     if (!isAutoRotate || isDragging) return;
     const interval = setInterval(() => {
-      setRotY((prev) => prev + 0.008);
+      setRotY((prev) => {
+        const next = prev + 0.009;
+        if (onRotYChange) {
+          const deg = ((next * 180) / Math.PI) % 360;
+          onRotYChange(deg < 0 ? deg + 360 : deg);
+        }
+        return next;
+      });
     }, 16);
     return () => clearInterval(interval);
-  }, [isAutoRotate, isDragging]);
+  }, [isAutoRotate, isDragging, onRotYChange]);
 
+  // Pointer / Touch Handlers optimized for mobile without blocking page scroll
   const handlePointerDown = (e: React.PointerEvent) => {
-    setIsDragging(true);
-    setDragStart({ x: e.clientX, y: e.clientY });
+    touchStartRef.current = { x: e.clientX, y: e.clientY, time: performance.now() };
+    touchLockedAxisRef.current = null;
+    velocityRef.current = 0;
     if (onUserInteract) onUserInteract();
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - dragStart.x;
-    const deltaY = e.clientY - dragStart.y;
-    setDragStart({ x: e.clientX, y: e.clientY });
+    if (!touchStartRef.current) return;
 
-    setRotY((prev) => prev + deltaX * 0.008);
-    setRotX((prev) => Math.max(-0.6, Math.min(0.8, prev + deltaY * 0.008)));
+    const deltaX = e.clientX - touchStartRef.current.x;
+    const deltaY = e.clientY - touchStartRef.current.y;
+
+    // Axis disambiguation on touch devices
+    if (!touchLockedAxisRef.current) {
+      if (Math.abs(deltaX) > 7 || Math.abs(deltaY) > 7) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          touchLockedAxisRef.current = "horizontal";
+          setIsDragging(true);
+        } else {
+          touchLockedAxisRef.current = "vertical";
+          return; // Let native vertical scroll occur!
+        }
+      } else {
+        return;
+      }
+    }
+
+    if (touchLockedAxisRef.current === "horizontal") {
+      const now = performance.now();
+      const dt = Math.max(1, now - touchStartRef.current.time);
+      const sensitivity = isMobile ? 0.012 : 0.009;
+      const step = deltaX * sensitivity;
+
+      velocityRef.current = step * 0.45; // Store velocity for inertia
+
+      setRotY((prev) => {
+        const next = prev + step;
+        if (onRotYChange) {
+          const deg = ((next * 180) / Math.PI) % 360;
+          onRotYChange(deg < 0 ? deg + 360 : deg);
+        }
+        return next;
+      });
+
+      // Subtle vertical tilt response
+      setRotX((prev) => Math.max(-0.5, Math.min(0.75, prev + deltaY * 0.005)));
+
+      touchStartRef.current = { x: e.clientX, y: e.clientY, time: now };
+    }
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (touchStartRef.current && isDragging) {
+      // Swipe gesture check (quick flick)
+      const now = performance.now();
+      const dt = now - touchStartRef.current.time;
+      const totalDx = e.clientX - touchStartRef.current.x;
+      if (dt < 250 && Math.abs(totalDx) > 60) {
+        if (totalDx < 0 && onSwipeNext) onSwipeNext();
+        if (totalDx > 0 && onSwipePrev) onSwipePrev();
+      }
+    }
     setIsDragging(false);
+    touchStartRef.current = null;
+    touchLockedAxisRef.current = null;
   };
 
   if (!hasWebGL) {
@@ -445,18 +556,29 @@ export function ThreeBottleCanvas({
     );
   }
 
+  // Final combined rotation including smooth scroll reactive offset
+  const finalRotY = rotY + scrollRotDelta;
+  const finalRotX = rotX;
+
   return (
     <div
-      className={`w-full h-full relative select-none touch-none ${
+      className={`w-full h-full relative select-none ${
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
+      style={{ touchAction: "pan-y" }} // Crucial for smooth mobile vertical page scroll!
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
       <Canvas
-        camera={{ position: [0, 0.2, 5.0], fov: 42 }}
+        camera={
+          isMobile
+            ? { position: [0, 0.05, 5.4], fov: 46 }
+            : { position: [0, 0.15, 4.9], fov: 41 }
+        }
+        dpr={isMobile ? [1, 1.5] : [1, 2]} // High performance 60fps on mobile screens
         gl={{
           antialias: true,
           powerPreference: "high-performance",
@@ -464,7 +586,7 @@ export function ThreeBottleCanvas({
         }}
         className="w-full h-full"
       >
-        <ambientLight intensity={1.4} />
+        <ambientLight intensity={1.5} />
 
         {/* Dynamic Studio Key Light */}
         <directionalLight
@@ -484,7 +606,7 @@ export function ThreeBottleCanvas({
         {/* Top Rim Spotlight */}
         <spotLight
           position={[0, 7, 2]}
-          intensity={3.0}
+          intensity={3.2}
           angle={0.55}
           penumbra={0.8}
           color="#ffffff"
@@ -497,18 +619,18 @@ export function ThreeBottleCanvas({
         >
           <InteractiveJuiceBottle
             activeJuice={activeJuice}
-            targetRotY={rotY}
-            targetRotX={rotX}
-            isAutoRotate={isAutoRotate}
-            scale={isMobile ? 1.05 : 1.28}
-            offsetY={0}
+            targetRotY={finalRotY}
+            targetRotX={finalRotX}
+            scale={isMobile ? 1.02 : 1.28}
+            offsetY={isMobile ? -0.08 : 0}
+            isDragging={isDragging}
           />
         </Float>
 
         <ContactShadows
-          position={[0, -2.3, 0]}
+          position={[0, isMobile ? -2.0 : -2.3, 0]}
           opacity={0.55}
-          scale={6.5}
+          scale={isMobile ? 5.5 : 6.5}
           blur={2.6}
           far={3.8}
           color="#000000"

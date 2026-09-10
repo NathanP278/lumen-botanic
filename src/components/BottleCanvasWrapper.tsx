@@ -24,6 +24,10 @@ interface BottleCanvasWrapperProps {
   viewPreset: "front" | "label" | "tilt" | "cap";
   isAutoRotate: boolean;
   onUserInteract?: () => void;
+  onSwipeNext?: () => void;
+  onSwipePrev?: () => void;
+  externalRotY?: number;
+  onRotYChange?: (deg: number) => void;
 }
 
 export function BottleCanvasWrapper(props: BottleCanvasWrapperProps) {
